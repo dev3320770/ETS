@@ -134,7 +134,7 @@ ACCOUNT_ACTIVATION_DAYS=7
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'festusiipito@gmail.com'
-EMAIL_HOST_PASSWORD = 'EA/Dev.com'
+EMAIL_HOST_PASSWORD = '******'
 EMAIL_PORT = 587
 
 
