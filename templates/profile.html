@@ -1,0 +1,107 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+{% if user.is_authenticated %}
+{% include 'navauth.html' %}
+    <hr class="my-4">
+    <main>
+    <div class="container">
+
+        <br/>
+
+
+
+ <div class="col-sm-6 col-md-4 col-lg-4 mt-4">
+             <!--Card Wider-->
+<div class="card card-cascade wider">
+
+    <!--Card image-->
+    <div class="view overlay">
+        <img src="{% static '../' %}{{ user.profile.photo }}" class="img-fluid">
+        <a href="#!">
+            <div class="mask rgba-white-slight"></div>
+        </a>
+    </div>
+    <!--/Card image-->
+
+    <!--Card content-->
+    <div class="card-body">
+        <!--Title-->
+        <h4 class="card-title"><strong>{{ user.first_name|default:"<a href='#'>Firstname </a>" }} {{ user.last_name |default:"<a href='#'>Lastname </a>" }}</strong></h4>
+        <h5 class="indigo-text"><strong>{{ user.profile.occupation |default:"<a href='../profileupdate/'>Occupaion </a>" }}</strong></h5>
+        <h5 class="indigo-text"><strong>{{ user.profile.idNumber|default:"<a href='#'>Add ID Number </a>" }}</strong></h5>
+         <h5 class="indigo-text"><strong>{{ user.profile.cellNumber|default:"<a href='#'>Add Cellphone Number </a>" }}</strong></h5>
+          <a  href="/profile/update/{{ user.id }}/" class="btn btn-primary waves-effect waves-effect btn-sm" role="button">Edit Profile </a>
+
+
+
+
+    </div>
+    <!--/.Card content-->
+
+</div>
+<!--/.Card Wider-->
+
+
+            </div>
+
+
+
+
+
+
+    <div class="row">
+
+            </div>
+
+
+    </div>
+  </main>
+
+    {% else %}
+
+{% include 'nav.html' %}
+{% include 'carousel.html' %}
+  <!--Main layout-->
+  <main>
+    <div class="container">
+
+        {% include 'sections.html' %}
+
+    </div>
+  </main>
+  <!--Main layout-->
+      <!--Footer-->
+  <footer class="page-footer text-center font-small mt-4 wow fadeIn">
+
+    <!--Call to action-->
+    <div class="pt-4">
+      <a class="btn btn-outline-white" href="https://mdbootstrap.com/getting-started/" target="_blank" role="button">Download MDB
+        <i class="fa fa-download ml-2"></i>
+      </a>
+      <a class="btn btn-outline-white" href="https://mdbootstrap.com/bootstrap-tutorial/" target="_blank" role="button">Start free tutorial
+        <i class="fa fa-graduation-cap ml-2"></i>
+      </a>
+    </div>
+    <!--/.Call to action-->
+
+
+    <hr class="my-4">
+
+    <!--Copyright-->
+    <div class="footer-copyright py-3">
+      © 2018 Copyright:
+      <a href="#" target="_blank"> ETIMS </a>
+    </div>
+    <!--/.Copyright-->
+
+  </footer>
+  <!--/.Footer-->
+
+{% endif %}
+{% endblock %}
+

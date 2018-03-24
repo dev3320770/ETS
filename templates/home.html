@@ -1,0 +1,338 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% load mathfilters %}
+{% block content %}
+
+
+
+{% if user.is_authenticated %}
+{% include 'navauth.html' %}
+    <hr class="my-4">
+    <main>
+
+
+    <div class="container">
+
+        <br/>
+
+
+
+    <section _ngcontent-c8="" class="mt-lg-5">
+
+    <div _ngcontent-c8="" class="row">
+
+
+ {% for lic in lics %}
+
+        <div _ngcontent-c8="" class="col-xl-4 col-md-6 mb-r">
+
+            <div _ngcontent-c8="" class="card classic-admin-card primary-color">
+                <div _ngcontent-c8="" class="card-body">
+
+                    <p _ngcontent-c8="" class="white-text">Drivers Licence</p>
+                    <h4 _ngcontent-c8="">
+                        <strong _ngcontent-c8=""> {{ lic.licenceCode }}</strong>
+                            <p _ngcontent-c8="">{{ lic.licenceNumber }}</p>
+                    </h4>
+                </div>
+
+                <div _ngcontent-c8="" class="card-body">
+                    <p _ngcontent-c8="">{{ lic.licenceBarcode }}</p>
+                </div>
+            </div>
+
+        </div>
+
+     {% empty %}
+
+        <div _ngcontent-c8="" class="col-xl-4 col-md-6 mb-r">
+
+            <div _ngcontent-c8="" class="card classic-admin-card primary-color">
+                <div _ngcontent-c8="" class="card-body">
+
+                    <p _ngcontent-c8="" class="white-text">Drivers Licence</p>
+                    <h4 _ngcontent-c8="">
+                        <strong _ngcontent-c8="">No Licence</strong>
+
+                    </h4>
+                </div>
+
+                <div _ngcontent-c8="" class="card-body">
+
+                </div>
+            </div>
+
+        </div>
+
+         {% endfor %}
+
+{% for veh in vehs %}
+
+        <div _ngcontent-c8="" class="col-xl-4 col-md-6 mb-r">
+
+            <div _ngcontent-c8="" class="card classic-admin-card warning-color">
+                <div _ngcontent-c8="" class="card-body">
+
+                    <p _ngcontent-c8="">Vehicles Details</p>
+                    <h4 _ngcontent-c8="">
+                        <strong _ngcontent-c8="">{{ veh.regNumber }}</strong>
+                        <p _ngcontent-c8="">{{ veh.vinNumber }}</p>
+
+                    </h4>
+                </div>
+<div _ngcontent-c8="" class="card-body">
+                    <p _ngcontent-c8="">{{ veh.regBarcode }}</p>
+                </div>
+
+            </div>
+
+        </div>
+          {% empty %}
+
+           <div _ngcontent-c8="" class="col-xl-4 col-md-6 mb-r">
+
+            <div _ngcontent-c8="" class="card classic-admin-card warning-color">
+                <div _ngcontent-c8="" class="card-body">
+
+                    <p _ngcontent-c8="">Vehicles Details</p>
+                    <h4 _ngcontent-c8="">
+                        <strong _ngcontent-c8="">No Vehicle </strong>
+
+
+                    </h4>
+                </div>
+<div _ngcontent-c8="" class="card-body">
+
+                </div>
+
+            </div>
+
+        </div>
+
+{% endfor %}
+
+
+
+
+
+
+    </div>
+
+</section>
+
+
+
+
+
+
+    <div class="row">
+
+                <!--Grid column-->
+                <div class="col-md-12 my-3 text-left">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <!-- Shopping Cart table -->
+                            <div class="table-responsive">
+                                <table class="table product-table table table-striped table-sm ">
+                                    <!-- Table head -->
+                                    <thead class="mdb-color lighten-5">
+                                        <tr>
+
+                                            <th class="font-weight-bold">
+                                                <strong>Date Issued</strong>
+                                            </th>
+                                            <th class="font-weight-bold">
+                                                <strong>Make / Registration #</strong>
+                                            </th>
+                                            <th> <strong>Violation Code</strong></th>
+                                            <th class="font-weight-bold">
+                                                <strong>Due Date</strong>
+                                            </th>
+
+                                            <th class="font-weight-bold">
+                                                <strong>Amount</strong>
+                                            </th>
+                                            <th class="mr-1"></th>
+
+                                        </tr>
+                                    </thead>
+                                    <!-- /.Table head -->
+                                    <!-- Table body -->
+                                    <tbody>
+                                        <!-- First row -->
+
+                                        {{ payment }}
+
+
+   {% for tic in tics %}
+
+
+
+    <div class="modal fade" id="conditionModal{{ tic.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-success" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <p class="heading lead">{{ tic.regNumber|upper }}</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true" class="white-text">&times;</span>
+                                                </button>
+            </div>
+
+            <!--Body-->
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="fa fa-check fa-4x mb-3 animated rotateIn"></i>
+                    <p>{{ tic.amount}}
+                    </p>
+                </div>
+            </div>
+
+            <!--Footer-->
+            <div class="modal-footer justify-content-center">
+                <a  class="btn btn-primary waves-effect waves-effect btn-sm" data-dismiss="modal" role="button">Dismiss </a>
+
+                <a  href="/pay/{{ tic.id }}/" class="btn btn-primary waves-effect waves-effect btn-sm" role="button">Pay </a>
+
+
+
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+
+                                                       <tr>
+
+                                            <td> {{ tic.dateCreated |naturaltime  }} </td>
+                                            <td>{{ tic.make|upper }}<p>{{ tic.regNumber|upper }}</p></td>
+                                            <td>{{ tic.violationCode }}</td>
+
+                                            <td><strong>{{ tic.deadline  }}</strong> <p><span class="badge badge-danger">{{ tic.deadline | timeuntil }}</span></p> </td>
+
+                                            <td class="font-weight-bold">
+                                                <strong>N${{ tic.amount }}</strong>
+                                            </td>
+                                            <td class="text-right">
+                                                <a class="btn btn-primary btn-sm" data-toggle="modal" id="{{ tic.id }}" data-target="#conditionModal{{ tic.id }}" role="button">View</a>
+                                                <a href="/pay/{{ tic.id }}/" class="btn btn-dark-green btn-sm" role="button">Pay</a>
+
+
+
+
+                                            </td>
+
+                                               {% empty %}
+
+       <tr>   <td colspan="6" class="text-center">
+                                                <h4 class="mt-3">
+                                                    <strong>No Ticket issued</strong>
+                                                </h4>
+                                            </td>
+       </tr>
+
+
+   {% endfor %}
+
+
+
+
+  <!-- /.First row -->
+
+
+{% if tic.amount == none %}
+
+
+ {% else %}
+                                        <tr>
+                                              <td>
+                                                <h4 class="mt-2">
+                                                   <strong>Total</strong>
+                                                </h4>
+
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+
+                                            <td >
+                                                <h4 class="mt-3">
+                                                    <strong>N${{ total |default:'0.00' }}</strong>
+                                                </h4>
+                                            </td>
+                                            <td class="text-right">
+
+                                                <button type="button" class="btn btn-dark-green waves-effect waves-light btn-sm">Pay Total Amount
+
+                                                </button>
+                                            </td>
+                                        </tr>
+
+{% endif %}
+
+                    <!-- Fourth row -->
+                                    </tbody>
+                                    <!-- /.Table body -->
+                                </table>
+                            </div>
+                            <!-- /.Shopping Cart table -->
+                        </div>
+                    </div>
+                </div>
+                <!--Grid column-->
+
+
+
+            </div>
+
+
+    </div>
+  </main>
+
+    {% else %}
+
+{% include 'nav.html' %}
+{% include 'carousel.html' %}
+  <!--Main layout-->
+  <main>
+    <div class="container">
+
+        {% include 'sections.html' %}
+
+    </div>
+  </main>
+  <!--Main layout-->
+      <!--Footer-->
+  <footer class="page-footer text-center font-small mt-4 wow fadeIn">
+
+    <!--Call to action-->
+  {% comment %}  <div class="pt-4">
+      <a class="btn btn-outline-white" href="https://mdbootstrap.com/getting-started/" target="_blank" role="button">Download MDB
+        <i class="fa fa-download ml-2"></i>
+      </a>
+      <a class="btn btn-outline-white" href="https://mdbootstrap.com/bootstrap-tutorial/" target="_blank" role="button">Start free tutorial
+        <i class="fa fa-graduation-cap ml-2"></i>
+      </a>
+    </div>{% endcomment %}
+    <!--/.Call to action-->
+
+
+  {% comment %}  <hr class="my-4">{% endcomment %}
+
+    <!--Copyright-->
+    <div class="footer-copyright py-3">
+      © 2018 Copyright:
+      <a href="#" target="_blank"> ETIMS </a>
+    </div>
+    <!--/.Copyright-->
+
+  </footer>
+  <!--/.Footer-->
+
+{% endif %}
+{% endblock %}
+

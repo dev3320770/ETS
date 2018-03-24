@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+       {% if user.is_authenticated %}
+    <meta http-equiv="REFRESH" content="0;{% url 'home' %}">
+            {% else %}
+          {% include 'nav.html' %}
+    {% endif %}
+      <div style="height: 100vh">
+        <div class="flex-center flex-column">
+            <h1 class="animated fadeIn mb-4">Invalid activation Link.</h1>
+
+            <h5 class="animated fadeIn mb-3">Thank you for using our product. We're glad you're with us.</h5>
+
+            <p class="animated fadeIn text-muted">ETIMS Team</p>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+    {% if user.is_authenticated %}
+    <meta http-equiv="REFRESH" content="0;{% url 'home' %}">
+            {% else %}
+          {% include 'nav.html' %}
+    {% endif %}
+
+
+<div style="height: 80vh;">
+    <div class="flex-center">
+        <div class="container col-sm-4">
+            <div class="card mx-xl-5">
+                <div class="card-body">
+                    <form method="post">
+                    {% csrf_token %}
+                        <p class="h4 text-center mb-4">Sign in</p>
+                           {% if form.errors %}
+                    <p class=" label label-danger">
+                        Your username and password didn't match.
+                        Please try again.
+                    </p>
+                {% endif %}
+                        <label for="username" class="grey-text">Your Username</label>
+                        <input type="textbox" id="username" name="username" class="form-control">
+                        <br>
+                        <label for="password" class="grey-text">Your password</label>
+                        <input type="password" id="password" name="password" class="form-control">
+                        <div class="text-center mt-6">
+                       <input type="submit" class="btn btn-indigo" value="login"> </input>
+                        </div>
+                        <div class="modal-footer">
+                        <div class="options font-weight-light">
+                            <p>Not a member? <a href="{% url 'signup' %}">Sign Up</a></p>
+                            <p>Forgot <a href="#">Password?</a></p>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
