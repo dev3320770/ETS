@@ -90,9 +90,9 @@ WSGI_APPLICATION = 'ETIMS.wsgi.application'
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'etims',
-            'USER': 'root',
-            'PASSWORD': '',
+            'NAME': '*****',
+            'USER': '*******',
+            'PASSWORD': '*********',
             'HOST': '127.0.0.1',   # Or an IP Address that your DB is hosted on
             'PORT': '3306',
         },
@@ -160,8 +160,8 @@ PHOTOSFILES_DIRS = (
 
 
 #RESOURCES_DIR = '/media/shared/src/django-paypal-store-example/samplesite/resources/'
-PAYPAL_PDT_TOKEN = 'AFcWxV21C7fd0v3bYYYRCpSSRl31AGNeewpt7vTCl7oAuElCKCblPOav'
-PAYPAL_EMAIL = 'festusiipito-facilitator@gmail.com'
+PAYPAL_PDT_TOKEN = 'fake code - AFcWxV21C7fd0v3bYYYRCpSSRl31AGNeewpt7vTCl7oAuElCKCblPOav'
+PAYPAL_EMAIL = '*****************@gmail.com'
 PAYPAL_RETURN_URL = 'http://127.0.0.1:8000'
 
 # sandbox
